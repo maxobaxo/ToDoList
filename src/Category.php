@@ -33,6 +33,7 @@
         function addTask($task)
         {
             $executed = $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$this->getId()}, {$task->getId()});");
+
             if ($executed) {
                 return true;
             } else {

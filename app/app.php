@@ -31,6 +31,9 @@
         $due_date = $_POST['due-date'];
         $task = new Task($description, $category_id, $due_date, $id = null);
         $task->save();
+
+        var_dump($task);
+
         $category = Category::find($category_id);
         // var_dump($category->getTasks());
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks(), 'due-date' => $due_date));
