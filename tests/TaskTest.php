@@ -241,10 +241,10 @@
             $test_task2 = new Task($description2, $category_id, $due_date);
             $test_task2->save();
 
-
             //Act
             $test_task->delete();
 
+            var_dump(Task::getAll());
             //Assert
             $this->assertEquals([$test_task2], Task::getAll());
         }

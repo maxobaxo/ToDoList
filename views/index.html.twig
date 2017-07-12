@@ -1,30 +1,28 @@
 <html>
-<head>
-    <title>To Do List</title>
-</head>
-<body>
-    <h1>Welcome to To Do List</h1>
+    <head>
+        <title>To Do List</title>
+    </head>
+    <body>
+        <h1>Welcome to To Do List</h1>
 
-    <p>Create a new category:</p>
+        <p>Create a new category:</p>
 
-       <form action="/categories" method="post">
-           <label for="category">Category name:</label>
-           <input id="category" name="category" type="text">
+           <form action="/categories" method="post">
+               <label for="category">Category name:</label>
+               <input id="category" name="category" type="text">
 
-           <button type="submit">Add category</button>
-       </form>
+               <button type="submit">Add category</button>
+           </form>
 
-       {% if categories is not empty %}
-           <p>Here are all your categories:</p>
-           <ul>
-               {% for category in categories %}
-                   <li><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></li>
-               {% endfor %}
-           </ul>
-       {% else %}
-         <p>There are no categories yet!</p>
-       {% endif %}
-
-
-</body>
+           {% if categories is not empty %}
+               <p>Here are all your categories:</p>
+               <ul>
+                   {% for category in categories %}
+                       <li><a href="/categories/{{ category.getId }}">{{ category.getName }}</a></li>
+                   {% endfor %}
+               </ul>
+           {% else %}
+             <p>There are no categories yet!</p>
+           {% endif %}
+    </body>
 </html>

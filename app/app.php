@@ -18,7 +18,7 @@
     ));
 
     $app->get("/", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array(Category::getAll()));
+        return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
 
     $app->get("/tasks", function() use ($app) {
@@ -44,6 +44,7 @@
     $app->post("/categories", function() use ($app) {
         $category = new Category($_POST['category']);
         $category->save();
+
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
 
