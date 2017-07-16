@@ -22,21 +22,19 @@
     });
 
     $app->get("/tasks", function() use ($app) {
-        return $app['twig']->render('category.html.twig', array('tasks' => Task::getAll()));
+        return $app['twig']->render('category.html.twig');
     });
 
     $app->post("/tasks", function() use ($app) {
         $description = $_POST['description'];
         $category_id = $_POST['category_id'];
         $due_date = $_POST['due-date'];
-        $task = new Task($description, $category_id, $due_date, $id = null);
+        $task = new Task($description, $category_id, $due_date);
         $task->save();
 
-        var_dump($task);
-
         $category = Category::find($category_id);
-        // var_dump($category->getTasks());
-        return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks(), 'due-date' => $due_date));
+
+        return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
 
     $app->get("/categories/{id}", function($id) use ($app) {

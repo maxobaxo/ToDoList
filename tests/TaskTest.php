@@ -224,7 +224,7 @@
             $this->assertEquals("Clean the dog", $test_task->getDescription());
         }
 
-        function test_deleteTask()
+        function testDelete()
         {
             //Arrange
             $name = "Pet Chores";
@@ -244,7 +244,6 @@
             //Act
             $test_task->delete();
 
-            var_dump(Task::getAll());
             //Assert
             $this->assertEquals([$test_task2], Task::getAll());
         }
