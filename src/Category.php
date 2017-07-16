@@ -30,17 +30,6 @@
             return $this->id;
         }
 
-        function addTask($task)
-        {
-            $executed = $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$this->getId()}, {$task->getId()});");
-
-            if ($executed) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
         function save()
         {
             $executed = $GLOBALS['DB']->exec("INSERT INTO categories (category) VALUES ('{$this->getName()}')");
@@ -101,6 +90,7 @@
                 array_push($tasks, $new_task);
             }
             return $tasks;
+            var_dump($tasks);
         }
 
         static function deleteAll()

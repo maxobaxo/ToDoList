@@ -32,7 +32,13 @@
         $task = new Task($description, $category_id, $due_date);
         $task->save();
 
+        var_dump($task);
+
         $category = Category::find($category_id);
+
+        // var_dump($category);
+        // var_dump($task);
+        // var_dump($category->getTasks());
 
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
