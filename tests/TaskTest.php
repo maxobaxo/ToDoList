@@ -209,5 +209,48 @@
             //Assert
             $this->assertEquals([$test_task2], Task::getAll());
         }
+
+        function testAddCategory()
+        {
+            // Arrange
+            $name = "Work";
+            $test_category = new Category($name);
+            $test_category->save();
+
+            $description = "Do the laundry";
+            $due_date = "6pm tonight";
+            $test_task = new Task($description, $due_date);
+            $test_task->save();
+
+            // Act
+            $test_task->addCategory($test_category);
+
+            // Assert
+            $this->assertEquals($test_task->getCategories(), [$test_category]);
+        }
+
+        function testGetCategories()
+        {
+            // Arrange
+            $name = "Work";
+            $test_category = new Category($name);
+            $test_category->save();
+
+            $name_2 = "Volunteer";
+            $test_category_2 = new Category($name_2);
+            $test_category_2->save();
+
+            $description = "Prepare new client proposal";
+            $due_date = "Tomorrow";
+            $test_task = new Task($description, $due_date);
+            $test_task->save();
+
+            // Act
+            $test_task->addCategory($test_category);
+            $test_task->addCategory($test_category_2);
+
+            // Assert
+            $this->assertEquals($test_task->getCategories(), [$test_category, $test_category_2]);
+        }
     }
 ?>
