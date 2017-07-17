@@ -56,13 +56,11 @@
             $test_category = new Category($name);
             $test_category->save();
 
-            var_dump($test_category);
-
             //Act
             $result = $test_category->getId();
 
             //Assert
-            $this->assertEquals(true, is_numeric($result));
+            $this->assertTrue(is_numeric($result));
         }
 
         function testSave()
@@ -168,6 +166,49 @@
             $this->assertEquals($test_category, $result);
         }
 
+        function testAddTask()
+        {
+            // Arrange
+            $name = "Pet Chores";
+            $test_category = new Category($name);
+            $test_category->save();
+
+            $description = "Wash the dog";
+            $due_date = 'July 4';
+            $test_task = new Task($description, $due_date);
+            $test_task->save();
+
+            // Act
+            $test_category->addTask($test_task);
+
+            // Assert
+            $this->assertEquals($test_category->getTasks(), [$test_task]);
+        }
+
+        function testGetTasks()
+        {
+            // Arrange
+            $name = "Home";
+            $test_category = new Category($name);
+            $test_category->save();
+
+            $description = "Launder the Sheets";
+            $due_date = "Monday";
+            $test_task = new Task($description, $due_date);
+            $test_task->save();
+
+            $description2 = "Hang paintings";
+            $due_date2 = "Friday";
+            $test_task2 = new Task($description2, $due_date2);
+            $test_task2->save();
+
+            // Act
+            $test_category->addTask($test_task);
+            $test_category->addTask($test_task2);
+
+            // Assert
+            $this->assertEquals($test_category->getTasks(), [$test_task, $test_task2]);
+        }
     }
 
 ?>
