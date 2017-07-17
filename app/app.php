@@ -64,6 +64,12 @@
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks(), 'all_tasks' => Task::getAll()));
     });
 
+    $app->get("/categories/{id}/edit", function($id) use ($app) {
+        $category = Category::find($id);
+
+        return $app['twig']->render('edit_category.html.twig', array('category' => $category));
+    });
+
     $app->post("/add_tasks", function() use ($app) {
         $category = Category::find($_POST['category_id']);
         $task = Task::find($_POST['task_id']);
@@ -78,6 +84,14 @@
         $task->addCategory($category);
 
         return $app['twig']->render('task.html.twig', array('task' => $task, 'tasks' => Task::getAll(), 'categories' => $task->getCategories(), 'all_categories' => Category::getAll()));
+    });
+
+    $app->patch("/categories/{id}", function($id) use ($app) {
+        $name = $_POST['new_name'];
+        $category = Category::find($id);
+        $category->update($name);
+
+        return $app['twig']->render('category.html.twig', array('tasks' => $category->getTasks(), 'all_tasks' => Task::getAll(), 'category' => $category));
     });
 
     $app->post("/delete_tasks", function() use ($app) {
