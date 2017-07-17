@@ -28,7 +28,8 @@
             //Arrange
             $description = "Do Dishes";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -43,7 +44,8 @@
             //Arrange
             $description = "Do Dishes";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -60,7 +62,8 @@
             //Arrange
             $description = "Wash the dog";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -75,7 +78,8 @@
             //Arrange
             $description = "Wash the dog";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -90,7 +94,8 @@
             //Arrange
             $description = "Do Dishes";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -105,7 +110,8 @@
             //Arrange
             $description = "Wash the dog";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -116,31 +122,33 @@
             $this->assertEquals("July 6", $result);
         }
 
-        // function testGetCompleted()
-        // {
-        //     // Arrange
-        //     $description = "Do Dishes";
-        //     $due_date = 'July 4';
-        //     $test_task = new Task($description, $due_date);
-        //     $test_task->save();
-        //
-        //     // Act
-        //     $result = $test_task->getCompleted();
-        //
-        //     // Assert
-        //     $this->assertEquals(1, $result);
-        // }
+        function testGetCompleted()
+        {
+            // Arrange
+            $description = "Do Dishes";
+            $due_date = 'July 4';
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
+            $test_task->save();
+
+            // Act
+            $result = $test_task->getCompleted();
+
+            // Assert
+            $this->assertEquals(false, $result);
+        }
 
         function testGetAll()
         {
             //Arrange
             $description = "Wash the dishes";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = 0; //ask Tyler WTF
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             $description_2 = "Water the lawn";
-            $test_task_2 = new Task($description_2, $due_date);
+            $test_task_2 = new Task($description_2, $due_date, $completed);
             $test_task_2->save();
 
             //Act
@@ -155,11 +163,12 @@
             //Arrange
             $description = "Wash the dishes";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             $description_2 = "Water the lawn";
-            $test_task_2 = new Task($description_2, $due_date);
+            $test_task_2 = new Task($description_2, $due_date, $completed);
             $test_task_2->save();
 
             //Act
@@ -175,11 +184,12 @@
             //Arrange
             $description = "Wash the dishes";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = 0; //ask Tyler WTF
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             $description_2 = "Water the lawn";
-            $test_task_2 = new Task($description_2, $due_date);
+            $test_task_2 = new Task($description_2, $due_date, $completed);
             $test_task_2->save();
 
             //Act
@@ -194,7 +204,8 @@
             //Arrange
             $description = "Bathe the dog";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             $new_description = "Clean the dog";
@@ -215,7 +226,8 @@
 
             $description = "Wash the dog";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -235,7 +247,8 @@
 
             $description = "Do the laundry";
             $due_date = "6pm tonight";
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             // Act
@@ -258,7 +271,8 @@
 
             $description = "Prepare new client proposal";
             $due_date = "Tomorrow";
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             // Act

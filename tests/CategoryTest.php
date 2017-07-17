@@ -101,7 +101,8 @@
 
             $description = "Launder the Sheets";
             $due_date = "Monday";
-            $test_task = new Task($description, $due_date);
+            $completed = false;
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             //Act
@@ -176,7 +177,8 @@
 
             $description = "Wash the dog";
             $due_date = 'July 4';
-            $test_task = new Task($description, $due_date);
+            $completed = 0; //ask Tyler WTF
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             // Act
@@ -195,12 +197,14 @@
 
             $description = "Launder the Sheets";
             $due_date = "Monday";
-            $test_task = new Task($description, $due_date);
+            $completed = 0; //ask Tyler WTF
+            $test_task = new Task($description, $due_date, $completed);
             $test_task->save();
 
             $description2 = "Hang paintings";
             $due_date2 = "Friday";
-            $test_task2 = new Task($description2, $due_date2);
+            $completed = 0; //ask Tyler WTF
+            $test_task2 = new Task($description2, $due_date2, $completed);
             $test_task2->save();
 
             // Act
