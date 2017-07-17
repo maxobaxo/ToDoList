@@ -3,12 +3,14 @@
     {
         private $description;
         private $due_date;
+        // private $completed;
         private $id;
 
         function __construct($description, $due_date, $id = null)
         {
             $this->description = $description;
             $this->due_date = $due_date;
+            // $this->completed = $completed;
             $this->id = $id;
         }
 
@@ -31,6 +33,16 @@
         {
             return $this->due_date;
         }
+
+        // function setCompleted()
+        // {
+        //
+        // }
+        //
+        // function getCompleted()
+        // {
+        //
+        // }
 
         function getId()
         {

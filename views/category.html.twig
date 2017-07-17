@@ -3,34 +3,40 @@
         <title>To Do List</title>
     </head>
     <body>
-        <h1>{{ category.getName }}</h1>
-        {% if tasks is not empty %}
-            <p>Here are the tasks:</p>
-            <ul>
-                {% for task in tasks %}
+        <div class="container">
+            <div class="jumbotron">
+                <h1>{{ category.getName }}</h1>
+            </div>
+            {% if tasks is not empty %}
+                <p>Here are the tasks:</p>
+                <ul>
+                    {% for task in tasks %}
                     <li>{{ task.getDescription }} | Due: {{ task.getDueDate }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>There are no tasks in the {{ category.getName }} category.</p>
-        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>There are no tasks in the {{ category.getName }} category.</p>
+            {% endif %}
 
-        <h4>Add a Task</h4>
-        <form action='/tasks' method='post'>
-            <input id='category_id' name='category_id' type='hidden' value='{{ category.getId }}'>
+            <h4>Add a Task to this Category:</h4>
+            <form action='/add_tasks' method='post'>
+                <input id='category_id' name='category_id' type='hidden' value='{{ category.getId }}'>
 
-            <label for='description'>Task Description</label>
-            <input id='description' name='description' type='text'>
+                <label for='task_id'>Select a Task</label>
+                <select id='task_id' name='task_id' type='text'>
+                    {% for task in all_tasks %}
+                        <option value="{{ task.getId }}"> {{ task.getDescription }} | {{ task.getDueDate }} </option>
+                    {% endfor %}
+                </select>
+                <button type='submit'>Add Task</button>
+            </form>
 
-            <label for="due-date">Set Do Date!</label>
-            <input type="text" name="due-date" id="due-date">
-
-            <button type='submit'>Add Task</button>
-        </form>
-        <form action="/empty_category" method="post">
+            <p><a href="/categories/{{ category.getId }}/edit">Edit this category</a></p>
+            <p><a href='/'>Home</a></p>
+            <!-- <form action="/empty_category" method="post">
             <input id='category_id' name='category_id' type='hidden' value='{{ category.getId }}'>
             <button type="submit" class="btn">:()</button>
-        </form>
-        <p><a href='/'>Home</a></p>
+        </form> -->
+        </div>
     </body>
 </html>

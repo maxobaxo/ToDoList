@@ -116,6 +116,21 @@
             $this->assertEquals("July 6", $result);
         }
 
+        // function testGetCompleted()
+        // {
+        //     // Arrange
+        //     $description = "Do Dishes";
+        //     $due_date = 'July 4';
+        //     $test_task = new Task($description, $due_date);
+        //     $test_task->save();
+        //
+        //     // Act
+        //     $result = $test_task->getCompleted();
+        //
+        //     // Assert
+        //     $this->assertEquals(1, $result);
+        // }
+
         function testGetAll()
         {
             //Arrange
