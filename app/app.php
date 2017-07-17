@@ -1,14 +1,15 @@
 <?php
+    date_default_timezone_set('America/Los_Angeles');
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/Task.php";
     require_once __DIR__."/../src/Category.php";
-
-    $app = new Silex\Application();
 
     $server = 'mysql:host=localhost:8889;dbname=to_do';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
+
+    $app = new Silex\Application();
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
@@ -18,6 +19,15 @@
     ));
 
     $app->get("/", function() use ($app) {
+        return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
+    });
+
+    $app->post("/categories", function() use ($app) {
+        $category = new Category($_POST['category']);
+        $category->save();
+
+        var_Dump($category);
+
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });
 
@@ -32,13 +42,7 @@
         $task = new Task($description, $category_id, $due_date);
         $task->save();
 
-        var_dump($task);
-
         $category = Category::find($category_id);
-
-        // var_dump($category);
-        // var_dump($task);
-        // var_dump($category->getTasks());
 
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
@@ -48,12 +52,6 @@
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
 
-    $app->post("/categories", function() use ($app) {
-        $category = new Category($_POST['category']);
-        $category->save();
-
-        return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
-    });
 
     $app->post("/delete_tasks", function() use ($app) {
         Task::deleteAll();

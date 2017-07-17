@@ -20,11 +20,6 @@
             return $this->name;
         }
 
-        function setId()
-        {
-            $this->id = intval($id);
-        }
-
         function getId()
         {
             return $this->id;
@@ -32,9 +27,11 @@
 
         function save()
         {
-            $executed = $GLOBALS['DB']->exec("INSERT INTO categories (category) VALUES ('{$this->getName()}')");
+            $sql = "INSERT INTO categories (category) VALUES ('{$this->getName()}')";
+
+            $executed = $GLOBALS['DB']->exec($sql);
             if ($executed) {
-                 $this->id= $GLOBALS['DB']->lastInsertId();
+                 $this->id = $GLOBALS['DB']->lastInsertId();
                  return true;
             } else {
                  return false;
@@ -79,7 +76,7 @@
         {
             $tasks = array();
             $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()};");
-            foreach($returned_tasks as $task) {
+            foreach ($returned_tasks as $task) {
                 $description = $task['description'];
                 $category_id = $task['category_id'];
                 $due_date = $task['due_date'];
@@ -90,7 +87,6 @@
                 array_push($tasks, $new_task);
             }
             return $tasks;
-            var_dump($tasks);
         }
 
         static function deleteAll()

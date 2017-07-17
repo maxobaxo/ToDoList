@@ -56,6 +56,8 @@
             $test_category = new Category($name);
             $test_category->save();
 
+            var_dump($test_category);
+
             //Act
             $result = $test_category->getId();
 
