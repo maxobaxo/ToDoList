@@ -69,7 +69,7 @@
         $task = Task::find($_POST['task_id']);
         $category->addTask($task);
 
-        return $app['twig']->render('category.html.twig', array('category' => $category, 'categories' => Category::getAll(), 'tasks' => $category->getTasks(), 'task' => $task));
+        return $app['twig']->render('category.html.twig', array('category' => $category, 'categories' => Category::getAll(), 'tasks' => $category->getTasks(), 'task' => $task, 'all_tasks' => Task::getAll()));
     });
 
     $app->post("/add_categories", function() use ($app) {
