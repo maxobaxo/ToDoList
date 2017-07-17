@@ -2,14 +2,12 @@
     class Task
     {
         private $description;
-        private $category_id;
         private $due_date;
         private $id;
 
-        function __construct($description, $category_id, $due_date, $id = null)
+        function __construct($description, $due_date, $id = null)
         {
             $this->description = $description;
-            $this->category_id = $category_id;
             $this->due_date = $due_date;
             $this->id = $id;
         }
@@ -24,16 +22,6 @@
             return $this->description;
         }
 
-        function getId()
-        {
-            return $this->id;
-        }
-
-        function getCategoryId()
-        {
-            return $this->category_id;
-        }
-
         function setDueDate($new_due_date)
         {
             $this->due_date = (string) $new_due_date;
@@ -42,6 +30,11 @@
         function getDueDate()
         {
             return $this->due_date;
+        }
+
+        function getId()
+        {
+            return $this->id;
         }
 
         function save()
@@ -61,10 +54,9 @@
             $tasks = array();
             foreach($returned_tasks as $task) {
                 $description = $task['description'];
-                $category_id = $task['category_id'];
                 $due_date = $task['due_date'];
                 $id = $task['id'];
-                $new_task = new Task($description, $category_id, $due_date, $id);
+                $new_task = new Task($description, $due_date, $id);
                 array_push($tasks, $new_task);
             }
             return $tasks;
@@ -87,11 +79,10 @@
             $returned_tasks->execute();
             foreach ($returned_tasks as $task) {
                 $task_description = $task['description'];
-                $category_id = $task['category_id'];
                 $due_date = $task['due_date'];
                 $task_id = $task['id'];
                 if ($task_id == $search_id) {
-                    $found_task = new Task($task_description, $category_id, $due_date, $task_id);
+                    $found_task = new Task($task_description, $due_date, $task_id);
                 }
             }
             return $found_task;

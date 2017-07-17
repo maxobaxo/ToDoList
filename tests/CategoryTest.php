@@ -65,43 +65,6 @@
             $this->assertEquals(true, is_numeric($result));
         }
 
-        function testGetTasks()
-        {
-            //Arrange
-            $name = "Home stuff";
-            $test_category = new Category($name);
-            $test_category->save();
-            $category_id = $test_category->getId();
-
-            $name = "Work stuff";
-            $test_category2 = new Category($name);
-            $test_category2->save();
-            $category_id2 = $test_category2->getId();
-
-            $description = "Wash the dog";
-            $due_date = 'July 4';
-            $test_task = new Task($description, $category_id, $due_date);
-            $test_task->save();
-
-            $description2 = "Take out the trash";
-            $due_date2 = 'July 6';
-            $test_task2 = new Task($description2, $category_id, $due_date2);
-            $test_task2->save();
-
-            $description3 = "Turn in final proposal";
-            $due_date3 = 'July 10';
-            $test_task3 = new Task($description3, $category_id2, $due_date3);
-            $test_task3->save();
-
-            //Act
-            $result = $test_category2->getTasks();
-
-            // var_dump($result);
-
-            //Assert
-            $this->assertEquals([$test_task3], $result);
-        }
-
         function testSave()
         {
             //Arrange
@@ -204,6 +167,7 @@
             //Assert
             $this->assertEquals($test_category, $result);
         }
+
     }
 
 ?>

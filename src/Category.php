@@ -72,23 +72,6 @@
             return $categories;
         }
 
-        function getTasks()
-        {
-            $tasks = array();
-            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()};");
-            foreach ($returned_tasks as $task) {
-                $description = $task['description'];
-                $category_id = $task['category_id'];
-                $due_date = $task['due_date'];
-                $task_id = $task['id'];
-
-                $new_task = new Task($description, $category_id, $due_date, $task_id);
-
-                array_push($tasks, $new_task);
-            }
-            return $tasks;
-        }
-
         static function deleteAll()
         {
           $GLOBALS['DB']->exec("DELETE FROM categories;");
@@ -102,9 +85,9 @@
             $returned_categories->execute();
             foreach($returned_categories as $category) {
                 $category_name = $category['category'];
-                $category_id = $category['id'];
-                if ($category_id == $search_id) {
-                  $found_category = new Category($category_name, $category_id);
+                $id = $category['id'];
+                if ($id == $search_id) {
+                  $found_category = new Category($category_name, $id);
                 }
             }
             return $found_category;
